@@ -18,7 +18,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Install the migration: `rails g devise_account_expireable`
+2. `rake db:migrate`
+3. Add `:account_expireable` to the devise line of you account (User) model.
+`devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :account_expireable`
+4. Add a way through your admin panel of setting the attribute `:expires_at` to a date/time on the account (User) model.
 
 ## Contributing
 
