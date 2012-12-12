@@ -1,6 +1,6 @@
 require 'rails/generators/migration'
 
-class DeviseTraceableGenerator < Rails::Generators::NamedBase
+class DeviseAccountExpireableGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
 
   desc "Generates a migration to add required field to devise account model."
@@ -24,25 +24,27 @@ class DeviseTraceableGenerator < Rails::Generators::NamedBase
   class_option :orm
   class_option :migration, :type => :boolean, :default => orm_has_migration?
 
-  def invoke_orm_model
+  def invoke_migration
 
     model_name = ask("What is the name of your account model? (Leave blank for User): ")
     model_name = "User" if model_name.blank?
 
-    model_name = model_name.camelize.singularize
+    @model_name = model_name.camelize.singularize
 
 
 
-    if colum_exists?(model_name)
+    if colum_exists?
       say "* Colum exists on model already exists."
     else
       migration_template 'migration.rb', "db/migrate/devise_update_#{model_name.downcase}_expire_fields.rb"
     end
+
+    puts "Make sure to add :account_expireable to the devise line of your #{@model_name} model file."
   end
 
   protected
 
   def colum_exists?
-    model_name.constantize.has_attribute?(:expires_at)
+    @model_name.constantize.column_names.include?("expires_at")
   end
 end

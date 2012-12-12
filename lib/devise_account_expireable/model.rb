@@ -1,5 +1,3 @@
-require 'devise_account_expireable/hooks/account_expireable'
-
 module Devise
   module Models
     # Trace information about your user sign in. It tracks the following columns:
@@ -12,30 +10,26 @@ module Devise
       extend  ActiveSupport::Concern
 
       def expired?
-        expires_at.present? && expires_at < Date.now
+        expires_at.present? && expires_at < DateTime.now
       end
 
-      def unauthenticated_message
-        :account_expired
-      end
+
 
       def self.required_fields(klass)
         attributes = []
         attributes << :expires_at
         attributes
       end
+      def access_locked?
+        expired?
+      end
+      def active_for_authentication?
+        super && !expired?
+      end
 
       def inactive_message
         expired? ? :account_expired : super
       end
-
-      def valid_for_authentication?
-        if super && !expired?
-          true
-        else
-          false
-        end
-      end      
     end
   end
 end

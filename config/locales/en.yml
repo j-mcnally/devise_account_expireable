@@ -1,0 +1,5 @@
+en:
+  devise:
+    failure:
+      user:
+        account_expired: "Your account has expired. You may re-request access from an administrator."
