@@ -1,10 +1,8 @@
 module Devise
   module Models
-    # Trace information about your user sign in. It tracks the following columns:
+    # Allow for expiration date on Devise resources. Adds attribute:
 
-    # * resource_id
-    # * sign_in_at
-    # * sign_out_at
+    # * expires_at
     
     module AccountExpireable
       extend  ActiveSupport::Concern
@@ -13,16 +11,41 @@ module Devise
         expires_at.present? && expires_at < DateTime.now
       end
 
+      def expire_now
+        expire_at
+      end
 
+      def expire_now!
+        expire_at!
+      end
+
+      def unexpire_now
+        expire_at nil
+      end
+
+      def unexpire_now!
+        expire_at! nil
+      end
+
+      def expire_at(date_time = DateTime.now)
+        self.expires_at = date_time
+      end
+
+      def expire_at!(date_time = DateTime.now)
+        expire_at(date_time)
+        save
+      end
 
       def self.required_fields(klass)
         attributes = []
         attributes << :expires_at
         attributes
       end
+
       def access_locked?
         expired?
       end
+
       def active_for_authentication?
         super && !expired?
       end

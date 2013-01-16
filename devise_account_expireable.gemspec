@@ -2,8 +2,8 @@
 require File.expand_path('../lib/devise_account_expireable/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Justin McNally"]
-  gem.email         = ["justin@kohactive.com"]
+  gem.authors       = ["Justin McNally", "Brendten Eickstaedt"]
+  gem.email         = ["justin@kohactive.com", "brendten@brendteneickstaedt.com"]
   gem.description   = %q{Expire a user's account at a certain date}
   gem.summary       = %q{At a certain date make a user's account not work}
   gem.homepage      = ""
