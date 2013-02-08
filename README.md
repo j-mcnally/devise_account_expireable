@@ -53,13 +53,13 @@ u1.expire_now!
 If you want to expire User u1 at a future DateTime (like DateTime.now.end_of_day), without immediate persistence to DB:
 
 ```ruby
-u1.expire_now DateTime.now.end_of_day
+u1.expire_at DateTime.now.end_of_day
 ```
 
 If you want to expire User u1 at a future DateTime (like DateTime.now.end_of_day), with immediate persistence to DB:
 
 ```ruby
-u1.expire_now! DateTime.now.end_of_day
+u1.expire_at! DateTime.now.end_of_day
 ```
 
 If you want to unexpire User u1 now, without immediate persistence to DB:
