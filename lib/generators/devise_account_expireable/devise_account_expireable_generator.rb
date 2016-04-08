@@ -33,8 +33,8 @@ class DeviseAccountExpireableGenerator < Rails::Generators::Base
 
 
 
-    if colum_exists?
-      say "* Colum exists on model already exists."
+    if column_exists?
+      say "* Column exists on model already exists."
     else
       migration_template 'migration.rb', "db/migrate/devise_update_#{model_name.downcase}_expire_fields.rb"
     end
@@ -44,7 +44,7 @@ class DeviseAccountExpireableGenerator < Rails::Generators::Base
 
   protected
 
-  def colum_exists?
+  def column_exists?
     @model_name.constantize.column_names.include?("expires_at")
   end
 end
