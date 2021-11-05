@@ -6,7 +6,7 @@ class DeviseAccountExpireableGenerator < Rails::Generators::Base
   desc "Generates a migration to add required field to devise account model."
 
   def self.source_root
-    @_devise_source_root ||= File.expand_path("../templates", __FILE__)
+    @_devise_source_root ||= File.expand_path("../", __FILE__)
   end
 
   def self.orm_has_migration?
@@ -31,12 +31,10 @@ class DeviseAccountExpireableGenerator < Rails::Generators::Base
 
     @model_name = model_name.camelize.singularize
 
-
-
     if colum_exists?
       say "* Colum exists on model already exists."
     else
-      migration_template 'migration.rb', "db/migrate/devise_update_#{model_name.downcase}_expire_fields.rb"
+      generate(:migration, "AddExpiresAtTo#{@model_name}", "expires_at:datetime")
     end
 
     puts "Make sure to add :account_expireable to the devise line of your #{@model_name} model file."

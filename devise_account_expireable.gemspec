@@ -2,11 +2,12 @@
 require File.expand_path('../lib/devise_account_expireable/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Justin McNally", "Brendten Eickstaedt"]
-  gem.email         = ["justin@kohactive.com", "brendten@brendteneickstaedt.com"]
+  gem.authors       = ["Justin McNally", "Brendten Eickstaedt", "Toby Chin"]
+  gem.email         = ["justin@kohactive.com", "brendten@brendteneickstaedt.com", "chin.toby@gmail.com"]
   gem.description   = %q{Expire a user's account at a certain date}
   gem.summary       = %q{At a certain date make a user's account not work}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/tobychin/devise_account_expireable"
+  gem.licenses      = ["MIT"]
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -15,6 +16,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = DeviseAccountExpireable::VERSION
 
-  gem.add_dependency(%q<devise>, [">= 2.0.4"])
-  gem.add_dependency(%q<rails>, [">= 3.2"])
+  gem.add_dependency(%q<devise>, ["~> 4.8.0"])
+  gem.add_dependency(%q<rails>, ["~> 5.2"])
 end
